@@ -1,11 +1,19 @@
-project('nlang', 'c')
+project('nlang', 'c', default_options: ['c_std=c99'])
 
-utils = declare_dependency(
-  include_directories: ['src/utils']
+# utils = declare_dependency(
+#   include_directories: ['src/utils']
+# )
+#
+# parser = declare_dependency(
+#   include_directories: ['src/parser']
+# )
+
+executable(
+  'testexe', [
+    'src/main.c',
+    'src/parser/tokenizer.c',
+    'src/utils/read_ctx.c',
+  ],
+  include_directories: ['src/'],
+  # dependencies: [parser]
 )
-
-parser = declare_dependency(
-  include_directories: ['src/parser', 'src']
-)
-
-executable('testexe', 'src/main.c', dependencies: [parser])

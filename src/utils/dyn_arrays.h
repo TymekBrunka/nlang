@@ -57,6 +57,8 @@
         (da)->items[j] = (da)->items[--(da)->count]; \
     } while(0)
 
+#define da_foreach(Type, it, da) for (Type *it = (da)->items; it < (da)->items + (da)->count; ++it)
+
 // *
 //  added macros
 // *

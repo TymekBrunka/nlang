@@ -13,12 +13,18 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +0 ~/Documents/nlang/Session.vim
+badd +15 ~/Documents/nlang/meson.build
+badd +2 ~/Documents/nlang/src/main.c
+badd +55 ~/Documents/nlang/src/utils/dyn_arrays.h
+badd +6 ~/Documents/nlang/src/parser/tokenizer.h
+badd +23 ~/Documents/nlang/src/parser/tokenizer.c
+badd +14 ~/Documents/nlang/src/utils/read_ctx.c
+badd +17 ~/Documents/nlang/src/utils/read_ctx.h
 argglobal
 %argdel
-edit ~/Documents/nlang/Session.vim
+edit ~/Documents/nlang/src/parser/tokenizer.c
 argglobal
-balt ~/Documents/nlang/Session.vim
+balt ~/Documents/nlang/src/utils/dyn_arrays.h
 setlocal foldmethod=manual
 setlocal foldexpr=0
 setlocal foldmarker={{{,}}}
@@ -29,12 +35,12 @@ setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 1 - ((0 * winheight(0) + 27) / 55)
+let s:l = 3 - ((2 * winheight(0) + 27) / 55)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 1
-normal! 0
+keepjumps 3
+normal! 014|
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
@@ -48,7 +54,6 @@ if filereadable(s:sx)
 endif
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
-nohlsearch
 doautoall SessionLoadPost
 unlet SessionLoad
 " vim: set ft=vim :
