@@ -14,17 +14,19 @@ else
   set shortmess=aoO
 endif
 badd +15 ~/Documents/nlang/meson.build
-badd +2 ~/Documents/nlang/src/main.c
+badd +4 ~/Documents/nlang/src/main.c
 badd +55 ~/Documents/nlang/src/utils/dyn_arrays.h
-badd +6 ~/Documents/nlang/src/parser/tokenizer.h
-badd +23 ~/Documents/nlang/src/parser/tokenizer.c
-badd +14 ~/Documents/nlang/src/utils/read_ctx.c
-badd +17 ~/Documents/nlang/src/utils/read_ctx.h
+badd +12 ~/Documents/nlang/src/parser/tokenizer.h
+badd +12 ~/Documents/nlang/src/parser/tokenizer.c
+badd +1 ~/Documents/nlang/src/utils/defines.h
+badd +13 ~/Documents/nlang/src/utils/types.h
+badd +11 ~/Documents/nlang/src/utils/parser_reading.c
+badd +19 ~/Documents/nlang/src/utils/parser_reading.h
 argglobal
 %argdel
-edit ~/Documents/nlang/src/parser/tokenizer.c
+edit ~/Documents/nlang/src/utils/parser_reading.h
 argglobal
-balt ~/Documents/nlang/src/utils/dyn_arrays.h
+balt ~/Documents/nlang/src/utils/parser_reading.c
 setlocal foldmethod=manual
 setlocal foldexpr=0
 setlocal foldmarker={{{,}}}
@@ -32,15 +34,15 @@ setlocal foldignore=#
 setlocal foldlevel=0
 setlocal foldminlines=1
 setlocal foldnestmax=20
-setlocal foldenable
+setlocal nofoldenable
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 3 - ((2 * winheight(0) + 27) / 55)
+let s:l = 19 - ((18 * winheight(0) + 27) / 55)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 3
-normal! 014|
+keepjumps 19
+normal! 028|
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

@@ -12,7 +12,7 @@ executable(
   'testexe', [
     'src/main.c',
     'src/parser/tokenizer.c',
-    'src/utils/read_ctx.c',
+    'src/utils/parser_reading.c',
   ],
   include_directories: ['src/'],
   # dependencies: [parser]

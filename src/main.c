@@ -1,9 +1,15 @@
 #include "stdio.h"
 #include "parser/tokenizer.h"
 
-nlang_read_context ctx = { .context.string = "hello", .type = true};
-
 int main() {
-    NLANG_TOKEN n = nlang_get_token(ctx);
-    printf("%d\n", n);
+
+    char string[] = "!!=ifelse ifelsewhile";
+
+    nlang_read_context* ctx = nlang_create_read_context(true, string);
+
+    for (int i = 0; i < 4; i++) {
+        NLANG_TOKEN_TYPE n = nlang_get_token(ctx);
+        printf("%d\n", n);
+        nlang_align_ctx_kw_buf(ctx);
+    }
 }
