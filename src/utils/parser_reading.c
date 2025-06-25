@@ -10,6 +10,9 @@ char nlang_read_from_ctx(nlang_read_context* ctx) {
         } else {
             c = fread(&c, 1, 1, ctx->context.file);
         }
+        *ctx->write_offset = c;
+        ctx->write_offset++;
+        ctx->read_offset++;
         return c;
     }
 
@@ -50,20 +53,34 @@ void nlang_fill_ctx_kw_buf(nlang_read_context* ctx) {
     }
 }
 
+void nlang_fill_ctx_kw_buf_up_to(nlang_read_context* ctx, int length) {
+    char c;
+    for (;ctx->write_offset < ctx->kw_buf + length; ctx->write_offset++) {
+        if (ctx->type) {
+            c = *ctx->context.string;
+            ctx->context.string++;
+        } else {
+            c = fread(&c, 1, 1, ctx->context.file);
+        }
+        *ctx->write_offset = c;
+    }
+}
+
 void nlang_align_ctx_kw_buf(nlang_read_context* ctx) {
-    if (ctx->read_offset == ctx->kw_buf || ctx->read_offset == ctx->kw_buf + NLANG_KWBL - 1) {
-        ctx->read_offset = 0;
+    char* end = ctx->kw_buf + NLANG_KWBL - 1;
+    if (ctx->read_offset == ctx->kw_buf) {
+        ctx->read_offset = ctx->kw_buf;
         return;
     }
 
     char* prev = ctx->kw_buf;
     char* next = ctx->read_offset;
-    char* end = ctx->write_offset;
+    end = ctx->write_offset;
     for (;next <= end; prev++, next++) {
         *prev = *next;
     }
-    ctx->read_offset = ctx->kw_buf;
     ctx->write_offset -= ctx->read_offset - ctx->kw_buf;
+    ctx->read_offset = ctx->kw_buf;
 }
 
 // void nlang_read_from_ctx_many(char* buf, nlang_read_context ctx, int length) {

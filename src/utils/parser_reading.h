@@ -22,6 +22,7 @@
     char nlang_read_from_ctx(nlang_read_context* ctx);
     char nlang_read_from_ctx_copying(nlang_read_context* ctx);
     void nlang_fill_ctx_kw_buf(nlang_read_context* ctx);
+    void nlang_fill_ctx_kw_buf_up_to(nlang_read_context* ctx, int length);
     void nlang_align_ctx_kw_buf(nlang_read_context* ctx);
     // void nlang_read_from_ctx_many(char* buf, nlang_read_context ctx, int length);
     void nlang_clear_char_buf(char* buf, int length);

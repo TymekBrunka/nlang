@@ -40,11 +40,29 @@
         NLANG_KW_WHILE,
         NLANG_KW_FOR,
 
+        // NLANG_KW_GOTO,
+
         NLANG_KW_THIS,
 
         NLANG_KW_THAT,
         NLANG_KW_WHEN,
         NLANG_KW_DURING,
+
+        NLANG_KW_TRY,
+        NLANG_KW_CATCH,
+        NLANG_KW_MATCH,
+        //lets get rusty
+        NLANG_KW_FN,
+        NLANG_KW_ERR,
+        NLANG_KW_OK,
+        NLANG_KW_SOME,
+        NLANG_KW_NONE,
+
+        NLANG_PT_INT,
+        NLANG_PT_UINT,
+        NLANG_PT_FLOATING,
+        NLANG_PT_CHAR,
+        NLANG_PT_STRING,
     } NLANG_TOKEN_TYPE;
 
     typedef struct {
