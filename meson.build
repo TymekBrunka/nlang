@@ -18,6 +18,7 @@ executable(
     'src/main.c',
     'src/parser/tokenizer.c',
     'src/utils/parser_reading.c',
+    'src/utils/token_printer.c',
   ],
   include_directories: ['src/'],
   # dependencies: [parser]

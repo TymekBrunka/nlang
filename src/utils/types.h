@@ -1,4 +1,5 @@
 #include <stddef.h>
+#include <stdint.h>
 
 #ifndef _nlang_types
 #define _nlang_types
@@ -19,7 +20,8 @@
         NLANG_DOUBLE_QUOTE,
         
         NLANG_FUNC,
-        NLANG_INDENTIFIER,
+        NLANG_IDENTIFIER,
+
         NLANG_FUNC_PARAM_OPEN,
         NLANG_FUNC_PARAM_CLOSE,
         NLANG_FUNC_PARAM_DECL_OPEN,
@@ -71,13 +73,25 @@
     } nlang_token;
 
     typedef struct {
-        const NLANG_TOKEN_TYPE *items;
+        nlang_token* items;
         size_t count;
         size_t capacity;
     } nlang_token_stream;
 
     typedef struct {
-        const void *items;
+        char* items;
+        size_t count;
+        size_t capacity;
+    } nlang_string;
+
+    typedef struct {
+        char* items;
+        int8_t count;
+        int8_t capacity;
+    } nlang_ident_string;
+
+    typedef struct {
+        void** items;
         size_t count;
         size_t capacity;
     } nlang_token_data_stream;

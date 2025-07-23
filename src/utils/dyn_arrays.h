@@ -13,13 +13,25 @@
             if ((da)->capacity == 0) {                                                       \
                 (da)->capacity = DA_INIT_CAP;                                                \
             }                                                                                \
-            while ((expected_capacity) > (da)->capacity) {                                   \
-                (da)->capacity *= 2;                                                         \
-            }                                                                                \
+            (da)->capacity = (expected_capacity);                                           \
             (da)->items = NLANG_REALLOC((da)->items, (da)->capacity * sizeof(*(da)->items)); \
             NLANG_ASSERT((da)->items != NULL && "Buy more RAM lol");                         \
         }                                                                                    \
     } while (0)
+
+// #define da_reserve(da, expected_capacity)                                                    \
+//     do {                                                                                     \
+//         if ((expected_capacity) > (da)->capacity) {                                          \
+//             if ((da)->capacity == 0) {                                                       \
+//                 (da)->capacity = DA_INIT_CAP;                                                \
+//             }                                                                                \
+//             while ((expected_capacity) > (da)->capacity) {                                   \
+//                 (da)->capacity *= 2;                                                         \
+//             }                                                                                \
+//             (da)->items = NLANG_REALLOC((da)->items, (da)->capacity * sizeof(*(da)->items)); \
+//             NLANG_ASSERT((da)->items != NULL && "Buy more RAM lol");                         \
+//         }                                                                                    \
+//     } while (0)
 
 // Append an item to a dynamic array
 #define da_append(da, item)                    \
@@ -59,7 +71,4 @@
 
 #define da_foreach(Type, it, da) for (Type *it = (da)->items; it < (da)->items + (da)->count; ++it)
 
-// *
-//  added macros
-// *
 #endif
