@@ -104,7 +104,11 @@ nlang_token nlang_fill_ctx_kw_buf_up_to_checked(nlang_read_context *ctx, nlang_t
 
             // ctx->read_offset = ctx->write_offset;
             if (indent_length != 0) {
-                nlang_ident_string str = {.items = (char *)malloc(length), .capacity = length, .count = 0};
+                nlang_ident_string str = {
+                    .items = (char *)calloc(1, length),
+                    .capacity = length,
+                    .count = 0
+                };
                 // void* fix = &str;
                 da_append_many(&str, ctx->kw_buf, length);
                 da_append(tok_data_stream, &str);

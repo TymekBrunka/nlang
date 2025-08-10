@@ -1,11 +1,32 @@
 // *
 //  slightly modified code from https://github.com/tsoding/nob.h/blob/main/nob.h
 // *
+//
+#ifndef _nlang_defines
+#define _nlang_defines
+
+#ifndef NLANG_ASSERT
+#include <assert.h>
+#define NLANG_ASSERT assert
+#endif /* NLANG_ASSERT */
+
+#ifndef DA_INIT_CAP
+#define DA_INIT_CAP 256
+#endif
+
+#endif
 
 #include "defines.h"
 
 #ifndef _NLANG_DA
 #define _NLANG_DA
+
+#define da_create(da, capacityy)                                \
+    {                                                           \
+        .items = (typeof((da){0}.items))calloc(1, (capacityy)), \
+        .count = 0,                                             \
+        .capacity = (capacityy)                                 \
+    }
 
 #define da_reserve(da, expected_capacity)                                                    \
     do {                                                                                     \
@@ -13,8 +34,8 @@
             if ((da)->capacity == 0) {                                                       \
                 (da)->capacity = DA_INIT_CAP;                                                \
             }                                                                                \
-            (da)->capacity = (expected_capacity);                                           \
-            (da)->items = NLANG_REALLOC((da)->items, (da)->capacity * sizeof(*(da)->items)); \
+            (da)->capacity = (expected_capacity);                                            \
+            (da)->items = realloc((da)->items, (da)->capacity * sizeof(*(da)->items)); \
             NLANG_ASSERT((da)->items != NULL && "Buy more RAM lol");                         \
         }                                                                                    \
     } while (0)
@@ -28,7 +49,7 @@
 //             while ((expected_capacity) > (da)->capacity) {                                   \
 //                 (da)->capacity *= 2;                                                         \
 //             }                                                                                \
-//             (da)->items = NLANG_REALLOC((da)->items, (da)->capacity * sizeof(*(da)->items)); \
+//             (da)->items = realloc((da)->items, (da)->capacity * sizeof(*(da)->items)); \
 //             NLANG_ASSERT((da)->items != NULL && "Buy more RAM lol");                         \
 //         }                                                                                    \
 //     } while (0)
@@ -42,7 +63,7 @@
 
 #define da_free(da)                     \
     do {                                \
-        NLANG_FREE((da).items);         \
+        free((da).items);         \
         (da)->capacity = 0;             \
         (da)->count = 0;                \
     } while(0);

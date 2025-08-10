@@ -85,24 +85,24 @@ NLANG_TOKEN_TYPE nlang_get_token(nlang_read_context *ctx, nlang_token_data_strea
 
     nlang_token tok = {0};
 
-    nlang_fill_ctx_kw_buf_up_to_checked_and_return_if_incorrect(ctx, 2);
+    nlang_fill_ctx_kw_buf_up_to_checked_and_return_if_incorrect(ctx, 3);
     nlang_kw("if", NLANG_KW_IF);
     nlang_kw("Ok", NLANG_KW_OK);
     nlang_kw("fn", NLANG_KW_FN);
-    nlang_fill_ctx_kw_buf_up_to_checked_and_return_if_incorrect(ctx, 3);
+    nlang_fill_ctx_kw_buf_up_to_checked_and_return_if_incorrect(ctx, 4);
     nlang_kw("Err", NLANG_KW_ERR);
     nlang_kw("for", NLANG_KW_FOR);
     nlang_kw("try", NLANG_KW_TRY);
-    nlang_fill_ctx_kw_buf_up_to_checked_and_return_if_incorrect(ctx, 4);
+    nlang_fill_ctx_kw_buf_up_to_checked_and_return_if_incorrect(ctx, 5);
     nlang_kw("else", NLANG_KW_ELSE);
     nlang_kw("this", NLANG_KW_THIS);
     nlang_kw("that", NLANG_KW_THAT);
     nlang_kw("when", NLANG_KW_WHEN);
-    nlang_fill_ctx_kw_buf_up_to_checked_and_return_if_incorrect(ctx, 5);
+    nlang_fill_ctx_kw_buf_up_to_checked_and_return_if_incorrect(ctx, 6);
     nlang_kw("while", NLANG_KW_WHILE);
     nlang_kw("catch", NLANG_KW_CATCH);
     nlang_kw("match", NLANG_KW_MATCH);
-    nlang_fill_ctx_kw_buf_up_to_checked_and_return_if_incorrect (ctx, 6);
+    nlang_fill_ctx_kw_buf_up_to_checked_and_return_if_incorrect (ctx, 7);
     nlang_kw("during", NLANG_KW_DURING);
     // nlang_fill_ctx_kw_buf_up_to(ctx, 7);
 
