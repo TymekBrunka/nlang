@@ -1,5 +1,5 @@
-#ifndef _nlang_defines
-#define _nlang_defines
+#ifndef _NLANG_DEFINES
+#define _NLANG_DEFINES
 
 // *
 //  slightly modified code from https://github.com/tsoding/nob.h/blob/main/nob.h

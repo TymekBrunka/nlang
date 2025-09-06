@@ -1,8 +1,8 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#ifndef _nlang_types
-#define _nlang_types
+#ifndef _NLANG_TYPES
+#define _NLANG_TYPES
 
     typedef enum {
         NLANG_INVALID = -1,
