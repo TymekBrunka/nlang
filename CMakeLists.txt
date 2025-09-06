@@ -7,7 +7,7 @@ include_directories("include/")
 add_library(reader OBJECT "src/reader.c")
 add_library(tokenizer OBJECT "src/parser/tokenizer.c")
 
-add_library(parser OBJECT "src/parser/tokenizer.c")
+add_library(parser OBJECT "src/parser/parser.c")
 target_link_libraries(parser
     tokenizer
     reader
