@@ -25,11 +25,6 @@
         char* read_pointer;
     } nlang_reader;
 
-    //* 1 = read attempt after end
-    int nlang_read_char(nlang_reader* reader, nlang_read_context* ctx);
-
-    int nlang_read_chars_many(nlang_reader* reader, nlang_read_context* ctx, int n);
-
     nlang_read_context nlang_create_read_context(void* filepath_or_string, NLANG_READER_TYPE type);
 
     nlang_reader nlang_create_reader();

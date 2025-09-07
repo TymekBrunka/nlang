@@ -14,16 +14,39 @@ else
   set shortmess=aoO
 endif
 badd +1 ~/Documents/nlang/src/main.c
-badd +19 ~/Documents/nlang/CMakeLists.txt
+badd +16 ~/Documents/nlang/CMakeLists.txt
 badd +1 ~/Documents/nlang/include/parser/tokenizer.h
 badd +1 ~/Documents/nlang/src/parser/tokenizer.c
 badd +91 ~/Documents/nlang/include/types.h
-badd +79 ~/Documents/nlang/src/parser/../reader.c
-badd +35 ~/Documents/nlang/include/reader.h
+badd +2 ~/Documents/nlang/src/parser/../reader.c
+badd +27 ~/Documents/nlang/include/reader.h
 badd +12 ~/Documents/nlang/include/utils/dyn_arrays.h
+badd +11 ~/Documents/nlang/include/reader_internal.h
 argglobal
 %argdel
-edit ~/Documents/nlang/CMakeLists.txt
+tabnew +setlocal\ bufhidden=wipe
+tabrewind
+edit ~/Documents/nlang/include/reader_internal.h
+argglobal
+balt ~/Documents/nlang/include/reader.h
+setlocal foldmethod=manual
+setlocal foldexpr=0
+setlocal foldmarker={{{,}}}
+setlocal foldignore=#
+setlocal foldlevel=0
+setlocal foldminlines=1
+setlocal foldnestmax=20
+setlocal foldenable
+silent! normal! zE
+let &fdl = &fdl
+let s:l = 11 - ((10 * winheight(0) + 27) / 55)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 11
+normal! 0
+tabnext
+edit ~/Documents/nlang/src/parser/../reader.c
 argglobal
 balt ~/Documents/nlang/src/main.c
 setlocal foldmethod=manual
@@ -36,12 +59,12 @@ setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 19 - ((18 * winheight(0) + 27) / 55)
+let s:l = 2 - ((1 * winheight(0) + 27) / 55)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 19
-normal! 013|
+keepjumps 2
+normal! 028|
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
