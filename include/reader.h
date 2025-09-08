@@ -22,7 +22,7 @@
 
     typedef struct {
         nlang_string contents;
-        char* read_pointer;
+        size_t read_index;
     } nlang_reader;
 
     nlang_read_context nlang_create_read_context(void* filepath_or_string, NLANG_READER_TYPE type);

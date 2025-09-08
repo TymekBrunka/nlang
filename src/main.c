@@ -12,10 +12,29 @@ int main() {
     nlang_read_context ctx = nlang_create_read_context(string, NLANG_READER_STRING);
     nlang_reader reader = nlang_create_reader();
 
-    for (int i = 0; i < 99; i++) {
-        printf("%d\n", nlang_read_char(&reader, &ctx));
-        printf("%1s\n", reader.read_pointer);
-    }
+    // for (int i = 0; i < 20; i++) {
+    //     printf("%d\n", nlang_read_char(&reader, &ctx));
+    //     printf("%1c\n", reader.contents.items[reader.read_index]);
+    //     printf("%s\n", &reader.contents.items[reader.read_index]);
+    //     printf("%s\n", reader.contents.items);
+    //     printf("\n");
+    // }
+    
+    nlang_read_for_token(&reader, &ctx, 5);
+
+    printf("%d\n", nlang_read_char(&reader, &ctx));
+    printf("%1c\n", reader.contents.items[reader.read_index]);
+    printf("%s\n", &reader.contents.items[reader.read_index]);
+    printf("%s\n", reader.contents.items);
+    printf("\n");
+
+    nlang_read_for_token(&reader, &ctx, 5);
+
+    printf("%d\n", nlang_read_char(&reader, &ctx));
+    printf("%1c\n", reader.contents.items[reader.read_index]);
+    printf("%s\n", &reader.contents.items[reader.read_index]);
+    printf("%s\n", reader.contents.items);
+    printf("\n");
 
     // nlang_read_context* ctx = nlang_create_read_context(true, string);
     // nlang_token_data_stream* data_stream = {0}; 

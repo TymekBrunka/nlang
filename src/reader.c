@@ -3,7 +3,7 @@
 #include "reader_internal.h"
 #include "utils/dyn_arrays.h"
 
-#define can_read_from_itself reader->read_pointer < reader->contents.items
+#define can_read_from_itself reader->read_index < reader->contents.count
 
 #define RETURN ret = 1
 
@@ -29,7 +29,7 @@ int nlang_read_char(nlang_reader* reader, nlang_read_context* ctx) {
     int ret = 0;
 
     if (can_read_from_itself) {
-        reader->read_pointer++;
+        reader->read_index++;
         return 0;
     }
 
@@ -47,7 +47,8 @@ int nlang_read_char(nlang_reader* reader, nlang_read_context* ctx) {
 int nlang_read_chars_many(nlang_reader* reader, nlang_read_context* ctx, int n) {
     char c;
     int ret = 0;
-    n -= (reader->contents.items - reader->read_pointer);
+    n -= (reader->contents.count - reader->read_index);
+    reader->read_index = reader->contents.count;
     if (ctx->type == NLANG_READER_FILE) {
         for (int i = 0; i < n && ret == 0; i++) {
             get_char_file(RETURN);
@@ -65,25 +66,33 @@ int nlang_read_chars_many(nlang_reader* reader, nlang_read_context* ctx, int n) 
 
 nlang_token nlang_read_for_token(nlang_reader* reader, nlang_read_context* ctx, int n) {
     char c;
-    bool err = false;
-    nlang_token ret = {
-        token: NLANG_PROCEED,
-        data_index: 0,
-    };
-    n -= (reader->contents.items - reader->read_pointer);
+    bool exit = false;
+    nlang_token ret = { NLANG_PROCEED, 0 };
+    char state_machine = 'a'; // (a)ny, (n)umber, (k)eyword, (i)ndentifier
+    int len_diff = (reader->contents.count - reader->read_index);
+
+    int i = 1;
+
+    c = *(reader->contents.items - len_diff);
+    printf("%1c\n", c);
+
+    for (; i < len_diff; i++) {
+
+    }
+
     if (ctx->type == NLANG_READER_FILE) {
-        for (int i = 0; i < n && err == false; i++) {
+        for (; i < n && !exit; i++) {
             get_char_file((
                 ret.token = NLANG_EOF,
-                err = true
+                exit = true
             ));
             da_append(&reader->contents, c);
         }
     } else {
-        for (int i = 0; i < n && err == false; i++) {
+        for (; i < n && !exit; i++) {
             get_char_string((
                 ret.token = NLANG_EOF,
-                err = true
+                exit = true
             ));
             da_append(&reader->contents, c);
         }
@@ -109,7 +118,7 @@ nlang_reader nlang_create_reader() {
     nlang_reader reader = {0};
     reader.contents.items = calloc(256, 1);
     reader.contents.capacity = 256;
-    reader.read_pointer = reader.contents.items;
+    reader.read_index = 0;
 
     return reader;
 }
