@@ -3,14 +3,20 @@ cmake_minimum_required(VERSION 3.15)
 project(nlang VERSION 1.0.0 LANGUAGES C)
 
 # options
-option(DEBUG "debug mode" ON)
+option(debug "debug mode" ON)
 
 include_directories("include/")
-if (debug)
-    add_compile_options(-D_DEBUG)
-endif()
 
 add_library(reader OBJECT "src/reader.c")
+
+if (debug)
+    message("-->>-- DEBUG MODE ON --<<--")
+    SET(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -g3 -D_DEBUG")
+
+    add_library(debuging OBJECT "src/debug/debug.c")
+    target_link_libraries(debuging reader)
+endif()
+
 add_library(tokenizer OBJECT "src/parser/tokenizer.c")
 
 add_library(parser OBJECT "src/parser/parser.c")
@@ -24,3 +30,7 @@ target_link_libraries(testexe
     reader
     tokenizer
 )
+
+if (debug)
+    target_link_libraries(testexe debuging)
+endif()

@@ -13,13 +13,13 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +34 ~/Documents/nlang/src/main.c
-badd +16 ~/Documents/nlang/CMakeLists.txt
+badd +22 ~/Documents/nlang/src/main.c
+badd +11 ~/Documents/nlang/CMakeLists.txt
 badd +1 ~/Documents/nlang/include/parser/tokenizer.h
 badd +1 ~/Documents/nlang/src/parser/tokenizer.c
 badd +72 ~/Documents/nlang/include/types.h
-badd +86 src/reader.c
-badd +5 ~/Documents/nlang/include/reader.h
+badd +74 src/reader.c
+badd +25 ~/Documents/nlang/include/reader.h
 badd +12 ~/Documents/nlang/include/utils/dyn_arrays.h
 badd +2 ~/Documents/nlang/include/reader_internal.h
 argglobal
@@ -46,7 +46,7 @@ normal! zt
 keepjumps 5
 normal! 0
 tabnext
-edit src/reader.c
+edit ~/Documents/nlang/CMakeLists.txt
 let s:save_splitbelow = &splitbelow
 let s:save_splitright = &splitright
 set splitbelow splitright
@@ -74,22 +74,22 @@ setlocal foldignore=#
 setlocal foldlevel=0
 setlocal foldminlines=1
 setlocal foldnestmax=20
-setlocal foldenable
+setlocal nofoldenable
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 86 - ((20 * winheight(0) + 21) / 42)
+let s:l = 11 - ((10 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 86
-normal! 026|
+keepjumps 11
+normal! 07|
 wincmd w
 argglobal
 if bufexists(fnamemodify("term://~/Documents/nlang//44607:/usr/bin/zsh;\#toggleterm\#1", ":p")) | buffer term://~/Documents/nlang//44607:/usr/bin/zsh;\#toggleterm\#1 | else | edit term://~/Documents/nlang//44607:/usr/bin/zsh;\#toggleterm\#1 | endif
 if &buftype ==# 'terminal'
   silent file term://~/Documents/nlang//44607:/usr/bin/zsh;\#toggleterm\#1
 endif
-balt src/reader.c
+balt ~/Documents/nlang/CMakeLists.txt
 setlocal foldmethod=manual
 setlocal foldexpr=0
 setlocal foldmarker={{{,}}}
@@ -98,11 +98,11 @@ setlocal foldlevel=0
 setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldenable
-let s:l = 2369 - ((11 * winheight(0) + 6) / 12)
+let s:l = 2217 - ((11 * winheight(0) + 6) / 12)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 2369
+keepjumps 2217
 normal! 04|
 wincmd w
 2wincmd w

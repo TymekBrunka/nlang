@@ -1,12 +1,15 @@
 #include "parser/tokenizer.h"
 #include "reader.h"
 #include "reader_internal.h"
+#include "debug/debug.h"
 // #define _nlang_token_printer_implementation
 // #include "utils/token_printer.h"
 #include "stdio.h"
+#include <locale.h>
 
 int main() {
 
+    setlocale(LC_ALL, "");
     char string[] = "!!= if (else) if else while";
 
     nlang_read_context ctx = nlang_create_read_context(string, NLANG_READER_STRING);
@@ -20,9 +23,13 @@ int main() {
     //     printf("\n");
     // }
     
+    nlang_pprint_reader(&reader);
     nlang_read_for_token(&reader, &ctx, 5);
 
     printf("%d\n", nlang_read_char(&reader, &ctx));
+
+    nlang_pprint_reader(&reader);
+
     printf("%1c\n", reader.contents.items[reader.read_index]);
     printf("%s\n", &reader.contents.items[reader.read_index]);
     printf("%s\n", reader.contents.items);
