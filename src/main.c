@@ -5,11 +5,11 @@
 // #define _nlang_token_printer_implementation
 // #include "utils/token_printer.h"
 #include "stdio.h"
-#include <locale.h>
+// #include <locale.h>
 
 int main() {
 
-    setlocale(LC_ALL, "");
+    // setlocale(LC_ALL, "");
     char string[] = "!!= if (else) if else while";
 
     nlang_read_context ctx = nlang_create_read_context(string, NLANG_READER_STRING);
@@ -24,24 +24,18 @@ int main() {
     // }
     
     nlang_pprint_reader(&reader);
-    nlang_read_for_token(&reader, &ctx, 5);
 
-    printf("%d\n", nlang_read_char(&reader, &ctx));
+    printf("%d\n", nlang_get_token(&reader, &ctx).token);
 
     nlang_pprint_reader(&reader);
 
-    printf("%1c\n", reader.contents.items[reader.read_index]);
-    printf("%s\n", &reader.contents.items[reader.read_index]);
-    printf("%s\n", reader.contents.items);
-    printf("\n");
+    printf("%d\n", nlang_get_token(&reader, &ctx).token);
 
-    nlang_read_for_token(&reader, &ctx, 5);
+    nlang_pprint_reader(&reader);
 
-    printf("%d\n", nlang_read_char(&reader, &ctx));
-    printf("%1c\n", reader.contents.items[reader.read_index]);
-    printf("%s\n", &reader.contents.items[reader.read_index]);
-    printf("%s\n", reader.contents.items);
-    printf("\n");
+    printf("%d\n", nlang_read_request(&reader, &ctx, 5));
+
+    nlang_pprint_reader(&reader);
 
     // nlang_read_context* ctx = nlang_create_read_context(true, string);
     // nlang_token_data_stream* data_stream = {0}; 

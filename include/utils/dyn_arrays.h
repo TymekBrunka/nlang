@@ -36,7 +36,7 @@
 // Append an item to a dynamic array
 #define da_append(da, item)                    \
     do {                                       \
-        da_reserve((da), (da)->count + 1);     \
+        da_reserve((da), (da)->count * 2);     \
         (da)->items[(da)->count++] = (item);   \
     } while (0)
 

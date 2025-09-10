@@ -4,12 +4,12 @@
 nlang_token nlang_get_token(nlang_reader* reader, nlang_read_context* ctx) {
     nlang_token tok = {NLANG_PROCEED, 0};
     int catch;
-    if (nlang_read_char(reader, ctx) == 1) {
+    if (nlang_read_request(reader, ctx, 1) == 1) {
         tok.token = NLANG_EOF;
         return tok;
     }
 
-    switch (reader->contents.items[reader->read_index]) {
+    switch (nlang_read_pointer) {
 
         case '{': {
             tok.token = NLANG_BRACKET_OPEN;
@@ -32,13 +32,15 @@ nlang_token nlang_get_token(nlang_reader* reader, nlang_read_context* ctx) {
         }
 
         case '!': {
-            catch = nlang_read_char(reader, ctx);
+            catch = nlang_read_request(reader, ctx, 1);
             char c = reader->contents.items[reader->read_index];
             if (c == '=') {
                 tok.token = NLANG_NOT_EQUALS;
                 return tok;
             } else {
-                reader->read_index--;
+                // reader->read_index--;
+                tok.token = NLANG_BANG;
+                return tok;
             }
         }
 
